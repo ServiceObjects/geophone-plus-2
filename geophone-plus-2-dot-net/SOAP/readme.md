@@ -24,7 +24,7 @@ It is highly recommended that you handle each of these contacts, rather than jus
 
 ```
 // 1. Instantiate the service wrapper
-GetPhoneInfoValidation getPhoneInfoValidation = new GetPhoneInfoValidation(true);
+GetPhoneInfoValidation getPhoneInfoValidation = new GetPhoneInfoValidation(IsLive);
 
 // 2. Build the input
 //  Required fields:
@@ -35,11 +35,13 @@ GetPhoneInfoValidation getPhoneInfoValidation = new GetPhoneInfoValidation(true)
 // 
 // Optional:
 //       TimeoutSeconds (default: 15)
+
 string PhoneNumber = "8059631700";
 string TestType = "FULL";
+string LicenseKey = "YOUR LICENSE KEY"
 
 // 3 Call the service
-PhoneInfoResponse response = getPhoneInfoValidation.GetPhoneInfo(PhoneNumber, TestType, licenseKey).Result;
+PhoneInfoResponse response = getPhoneInfoValidation.GetPhoneInfo(PhoneNumber, TestType, LicenseKey).Result;
 
 // 4. Inspect results.
 if (response.Error is null)

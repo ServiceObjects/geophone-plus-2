@@ -40,7 +40,7 @@ GetPhoneInfoClient.GetPhoneInfoInput  getPhoneInfoInput = new(
     PhoneNumber: "8059631700",
     TestType: "FULL",
     LicenseKey: licenseKey,
-    IsLive: isLive,
+    IsLive: true,
     TimeoutSeconds: 15
 );
 

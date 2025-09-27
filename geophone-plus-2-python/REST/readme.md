@@ -26,24 +26,24 @@ It is highly recommended that you handle each of these contacts, rather than jus
 # 1. Build the input
 #
 #  Required fields:
-#               PhoneNumber
-#               TestType 
-#               LicenseKey
-#               IsLive
+#               phone_number
+#               test_type 
+#               license_key
+#               is_live
 # 
 # Optional:
-#       TimeoutSeconds (default: 15)
+#       timeout_seconds
+
+from get_phone_Info_rest import get_phone_info
 
 phone_number = "8059631700"
 test_type = "FULL"
 timeout_seconds = 15
-
-from get_phone_Info_rest import get_phone_info
+is_live = True
+license_key = "YOUR LICENSE KEY"
 
 # 2. Call the method.
-response = get_phone_info(
-            phone_number, test_type, license_key, is_live, timeout_seconds
-        )
+response = get_phone_info(phone_number, test_type, license_key, is_live, timeout_seconds)
 
 # 3. Inspect results.
 if response.Error is None:

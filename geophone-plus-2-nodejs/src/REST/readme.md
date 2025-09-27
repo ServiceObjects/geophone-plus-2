@@ -26,80 +26,73 @@ It is highly recommended that you handle each of these contacts, rather than jus
 // 1. Build the input
 //
 //  Required fields:
-//               PhoneNumber
-//               TestType 
-//               LicenseKey
-//               IsLive
+//               phoneNumber
+//               testType 
+//               licenseKey
+//               isLive
 // 
 // Optional:
-//       TimeoutSeconds (default: 15)
+//       timeoutSeconds (default: 15)
 
 import { GetPhoneInfoClient } from "../geophone-plus-2-nodejs/src/REST/get_phone_info_rest.js";
 
 const phoneNumber = "8059631700";
 const testType = "FULL";
 const timeoutSeconds = 15;
+const isLive = true;
+const licenseKey = "YOUR LICENSE KEY";
 
 // 2. Call the sync Invoke() method.
-const response = await GetPhoneInfoClient.invoke(phoneNumber, testType,licenseKey,isLive, timeoutSeconds);
+const response = await GetPhoneInfoClient.invoke(phoneNumber, testType, licenseKey, isLive, timeoutSeconds);
 
 // 3. Inspect results.
-if (response.PhoneInfo) 
-{
-        console.log(`SMS Address      : ${response.PhoneInfo.SMSAddress}`);
-        console.log(`MMS Address      : ${response.PhoneInfo.MMSAddress}`);
-        console.log(`Date First Seen  : ${response.PhoneInfo.DateFirstSeen}`);
-        console.log(`Date of Porting  : ${response.PhoneInfo.DateOfPorting}`);
-        console.log(`Note Codes       : ${response.PhoneInfo.NoteCodes}`);
-        console.log(`Note Descriptions: ${response.PhoneInfo.NoteDescriptions}`);
-        console.log(`Tokens Used      : ${response.PhoneInfo.TokensUsed}`);
- 
-        console.log("\n* Provider Details *\n");
+console.log("\n* Phone Info *\n");
+if (response.PhoneInfo) {
+    console.log(`SMS Address      : ${response.PhoneInfo.SMSAddress}`);
+    console.log(`MMS Address      : ${response.PhoneInfo.MMSAddress}`);
+    console.log(`Date First Seen  : ${response.PhoneInfo.DateFirstSeen}`);
+    console.log(`Date of Porting  : ${response.PhoneInfo.DateOfPorting}`);
+    console.log(`Note Codes       : ${response.PhoneInfo.NoteCodes}`);
+    console.log(`Note Descriptions: ${response.PhoneInfo.NoteDescriptions}`);
+    console.log(`Tokens Used      : ${response.PhoneInfo.TokensUsed}`);
 
-    if (response.PhoneInfo.Provider)
-    {
+    console.log("\n* Provider Details *\n");
+    if (response.PhoneInfo.Provider) {
         console.log(`Name     : ${response.PhoneInfo.Provider.Name}`);
         console.log(`City     : ${response.PhoneInfo.Provider.City}`);
         console.log(`State    : ${response.PhoneInfo.Provider.State}`);
         console.log(`Line Type: ${response.PhoneInfo.Provider.LineType}`);
         console.log(`Latitude : ${response.PhoneInfo.Provider.Latitude}`);
         console.log(`Longitude: ${response.PhoneInfo.Provider.Longitude}`);
-    } 
-    else
-    {
-       console.log("No provider details found.");
+    } else {
+        console.log("No provider details found.");
     }
 
     console.log("\n* Contacts *\n");
-    if (response.PhoneInfo.Contacts && response.PhoneInfo.Contacts.length > 0)
-    {
-        response.PhoneInfo.Contacts.forEach((contact, index) => {
-        console.log(`Name           : ${contact.Name}`);
-        console.log(`Address        : ${contact.Address}`);
-        console.log(`City           : ${contact.City}`);
-        console.log(`State          : ${contact.State}`);
-        console.log(`Postal Code    : ${contact.PostalCode}`);
-        console.log(`Phone Type     : ${contact.PhoneType}`);
-        console.log(`Latitude       : ${contact.Latitude}`);
-        console.log(`Longitude      : ${contact.Longitude}`);
-        console.log(`SIC Code       : ${contact.SICCode}`);
-        console.log(`SIC Description: ${contact.SICDesc}`);
-        console.log(`Quality Score  : ${contact.QualityScore}`);
-        console.log("\n");
-    });
-    } 
-    else
-    {
-       console.log("No contacts found.");
+    if (response.PhoneInfo.Contacts && response.PhoneInfo.Contacts.length > 0) {
+        response.PhoneInfo.Contacts.forEach((contact) => {
+            console.log(`Name           : ${contact.Name}`);
+            console.log(`Address        : ${contact.Address}`);
+            console.log(`City           : ${contact.City}`);
+            console.log(`State          : ${contact.State}`);
+            console.log(`Postal Code    : ${contact.PostalCode}`);
+            console.log(`Phone Type     : ${contact.PhoneType}`);
+            console.log(`Latitude       : ${contact.Latitude}`);
+            console.log(`Longitude      : ${contact.Longitude}`);
+            console.log(`SIC Code       : ${contact.SICCode}`);
+            console.log(`SIC Description: ${contact.SICDesc}`);
+            console.log(`Quality Score  : ${contact.QualityScore}`);
+            console.log("");
+        });
+    } else {
+        console.log("No contacts found.");
     }
-}
-else 
-{
+} else {
     console.log("\n* Phone Info *\n");
     console.log("No phone info found.");
 }
-if (response.Error) 
-{
+
+if (response.Error) {
     console.log("\n* Error *\n");
     console.log(`Error Type       : ${response.Error.Type}`);
     console.log(`Error Type Code  : ${response.Error.TypeCode}`);

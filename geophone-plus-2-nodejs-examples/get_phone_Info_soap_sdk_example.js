@@ -5,19 +5,19 @@ export async function getPhoneInfoSoapGO(licenseKey, isLive) {
     console.log("GeoPhone Plus 2 - GetPhoneInfoInput - SOAP SDK");
     console.log("----------------------------------------------");
 
-    const phone_number = "8059631700";
-    const test_type = "FULL";
+    const phoneNumber = "8059631700";
+    const testType = "FULL";
     const timeoutSeconds = 15;
 
     console.log("\n* Input *\n");
-    console.log(`Phone Number   : ${phone_number}`);
-    console.log(`Test Type      : ${test_type}`);
+    console.log(`Phone Number   : ${phoneNumber}`);
+    console.log(`Test Type      : ${testType}`);
     console.log(`License Key    : ${licenseKey}`);
     console.log(`Is Live        : ${isLive}`);
     console.log(`Timeout Seconds: ${timeoutSeconds}`);
 
     try {
-        const gppl2 = new GetPhoneInfoSoap(phone_number, phone_number, licenseKey, isLive);
+        const gppl2 = new GetPhoneInfoSoap(phoneNumber, testType, licenseKey, isLive);
         const response = await gppl2.getPhoneInfo();
 
         console.log("\n* Phone Info *\n");
@@ -44,21 +44,19 @@ export async function getPhoneInfoSoapGO(licenseKey, isLive) {
             }
 
             console.log("\n* Contacts *\n");
-            if (response.PhoneInfo.Contacts && response.PhoneInfo.Contacts.length > 0) {
-                response.PhoneInfo.Contacts.forEach((contact, index) => {
-                    console.log(`Name           : ${contact.Name}`);
-                    console.log(`Address        : ${contact.Address}`);
-                    console.log(`City           : ${contact.City}`);
-                    console.log(`State          : ${contact.State}`);
-                    console.log(`Postal Code    : ${contact.PostalCode}`);
-                    console.log(`Phone Type     : ${contact.PhoneType}`);
-                    console.log(`Latitude       : ${contact.Latitude}`);
-                    console.log(`Longitude      : ${contact.Longitude}`);
-                    console.log(`SIC Code       : ${contact.SICCode}`);
-                    console.log(`SIC Description: ${contact.SICDesc}`);
-                    console.log(`Quality Score  : ${contact.QualityScore}`);
-                    console.log("\n");
-                });
+            if (response.PhoneInfo.Contacts) {
+                console.log(`Name           : ${response.PhoneInfo.Contacts.Contact[0].Name}`);
+                console.log(`Address        : ${response.PhoneInfo.Contacts.Contact[0].Address}`);
+                console.log(`City           : ${response.PhoneInfo.Contacts.Contact[0].City}`);
+                console.log(`State          : ${response.PhoneInfo.Contacts.Contact[0].State}`);
+                console.log(`Postal Code    : ${response.PhoneInfo.Contacts.Contact[0].PostalCode}`);
+                console.log(`Phone Type     : ${response.PhoneInfo.Contacts.Contact[0].PhoneType}`);
+                console.log(`Latitude       : ${response.PhoneInfo.Contacts.Contact[0].Latitude}`);
+                console.log(`Longitude      : ${response.PhoneInfo.Contacts.Contact[0].Longitude}`);
+                console.log(`SIC Code       : ${response.PhoneInfo.Contacts.Contact[0].SICCode}`);
+                console.log(`SIC Description: ${response.PhoneInfo.Contacts.Contact[0].SICDesc}`);
+                console.log(`Quality Score  : ${response.PhoneInfo.Contacts.Contact[0].QualityScore}`);
+                console.log("\n");
             } else {
                 console.log("No contacts found.");
             }

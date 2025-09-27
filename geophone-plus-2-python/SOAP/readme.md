@@ -26,17 +26,19 @@ It is highly recommended that you handle each of these contacts, rather than jus
 # 1. Build the input
 #
 #  Required fields:
-#               PhoneNumber
-#               TestType 
-#               LicenseKey
-#               IsLive
+#               phone_number
+#               test_type 
+#               license_key
+#               is_live
 # 
 # Optional:
-#       TimeoutSeconds (default: 15)
+#       timeout_seconds
 
 phone_number = "8059631700"
 test_type = "FULL"
 timeout_seconds = 15
+is_live = True
+license_key = "YOUR LICENSE KEY"
 
 from get_phone_Info_soap import GetPhoneInfoSoap
 

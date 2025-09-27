@@ -6,7 +6,7 @@ namespace geophone_plus_2_dot_net_examples
 {
     public class GetPhoneInfoSoapSdkExample
     {
-        public static void Go(string licenseKey, bool isLive)
+        public static void Go(string LicenseKey, bool IsLive)
         {
             Console.WriteLine("\r\n----------------------------------------------");
             Console.WriteLine("GeoPhone Plus 2 - GetPhoneInfoInput - SOAP SDK");
@@ -18,11 +18,11 @@ namespace geophone_plus_2_dot_net_examples
             Console.WriteLine("\r\n* Input *\r\n");
             Console.WriteLine($"Phone Number: {PhoneNumber}");
             Console.WriteLine($"Test Type   : {TestType}");
-            Console.WriteLine($"License Key : {licenseKey}");
-            Console.WriteLine($"Is Live     : {isLive}");
+            Console.WriteLine($"License Key : {LicenseKey}");
+            Console.WriteLine($"Is Live     : {IsLive}");
 
-            GetPhoneInfoValidation getPhoneInfoValidation = new GetPhoneInfoValidation(isLive);
-            PhoneInfoResponse response = getPhoneInfoValidation.GetPhoneInfo(PhoneNumber, TestType, licenseKey).Result;
+            GetPhoneInfoValidation getPhoneInfoValidation = new GetPhoneInfoValidation(IsLive);
+            PhoneInfoResponse response = getPhoneInfoValidation.GetPhoneInfo(PhoneNumber, TestType, LicenseKey).Result;
             if (response.Error is null)
             {
                 if (response.PhoneInfo != null)

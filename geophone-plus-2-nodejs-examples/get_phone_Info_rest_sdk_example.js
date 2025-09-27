@@ -17,13 +17,7 @@ export async function getPhoneInfoRestGO(licenseKey, isLive) {
     console.log(`Timeout Seconds: ${timeoutSeconds}`);
 
     try {
-        const response = await GetPhoneInfoClient.invoke(
-            phoneNumber,
-            testType,
-            licenseKey,
-            isLive,
-            timeoutSeconds
-        );
+        const response = await GetPhoneInfoClient.invoke(phoneNumber, testType, licenseKey, isLive, timeoutSeconds);
 
         console.log("\n* Phone Info *\n");
         if (response.PhoneInfo) {

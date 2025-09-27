@@ -7,21 +7,21 @@ import { GPPL2Response } from './gppl2_response.js';
  * @type {string}
  * @description The base URL for the live ServiceObjects GeoPhone Plus 2 API service.
  */
-const LiveBaseUrl = 'https://sws.serviceobjects.com/gppl2/api.svc/';
+const liveBaseUrl = 'https://sws.serviceobjects.com/gppl2/api.svc/';
 
 /**
  * @constant
  * @type {string}
  * @description The base URL for the backup ServiceObjects GeoPhone Plus 2 API service.
  */
-const BackupBaseUrl = 'https://swsbackup.serviceobjects.com/gppl2/api.svc/';
+const backupBaseUrl = 'https://swsbackup.serviceobjects.com/gppl2/api.svc/';
 
 /**
  * @constant
  * @type {string}
  * @description The base URL for the trial ServiceObjects GeoPhone Plus 2 API service.
  */
-const TrialBaseUrl = 'https://trial.serviceobjects.com/gppl2/api.svc/';
+const trialBaseUrl = 'https://trial.serviceobjects.com/gppl2/api.svc/';
 
 /**
  * <summary>
@@ -75,21 +75,21 @@ const GetPhoneInfoClient = {
      * Asynchronously invokes the GetPhoneInfo API endpoint, attempting the primary endpoint
      * first and falling back to the backup if the response is invalid (Error.TypeCode == '3') in live mode.
      * </summary>
-     * @param {string} PhoneNumber - 10 digit phone number.
-     * @param {string} TestType - The type of validation to perform ('FULL', 'BASIC', or 'NORMAL').
-     * @param {string} LicenseKey - Your license key to use the service
+     * @param {string} phoneNumber - 10 digit phone number.
+     * @param {string} testType - The type of validation to perform ('FULL', 'BASIC', or 'NORMAL').
+     * @param {string} licenseKey - Your license key to use the service
      * @param {boolean} isLive - Value to determine whether to use the live or trial servers.
      * @param {number} timeoutSeconds - Timeout, in seconds, for the call to the service.
      * @returns {Promise<GPPL2Response>} - A promise that resolves to a GPPL2Response object.
      */
-    async invokeAsync(PhoneNumber, TestType, LicenseKey, isLive = true, timeoutSeconds = 15) {
+    async invokeAsync(phoneNumber, testType, licenseKey, isLive = true, timeoutSeconds = 15) {
         const params = {
-            PhoneNumber,
-            TestType,
-            LicenseKey
+            phoneNumber,
+            testType,
+            licenseKey
         };
 
-        const url = buildUrl(params, isLive ? LiveBaseUrl : TrialBaseUrl);
+        const url = buildUrl(params, isLive ? liveBaseUrl : trialBaseUrl);
         let response = await httpGet(url, timeoutSeconds);
 
         if (isLive && !isValid(response)) {
@@ -108,9 +108,9 @@ const GetPhoneInfoClient = {
      * </summary>
      * @returns {GPPL2Response} - A GPPL2Response object with reverse phone lookup details or an error.
      */
-    invoke(PhoneNumber, TestType, LicenseKey, isLive = true, timeoutSeconds = 15) {
+    invoke(phoneNumber, testType, licenseKey, isLive = true, timeoutSeconds = 15) {
         return (async () => await this.invokeAsync(
-            PhoneNumber, TestType, LicenseKey, isLive, timeoutSeconds
+            phoneNumber, testType, licenseKey, isLive, timeoutSeconds
         ))();
     }
 };

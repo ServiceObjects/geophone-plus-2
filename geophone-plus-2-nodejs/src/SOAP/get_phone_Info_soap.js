@@ -1,5 +1,4 @@
 import { soap } from 'strong-soap';
-import { GPPL2Response } from './gppl2_response.js';
 
 /**
  * <summary>
@@ -13,9 +12,9 @@ class GetPhoneInfoSoap {
      * Initializes a new instance of the GetPhoneInfoSoap class with the provided input parameters,
      * setting up primary and backup WSDL URLs based on the live/trial mode.
      * </summary>
-     * @param {string} PhoneNumber - The 10 digit phone number.
-     * @param {string} TestType - The type of validation to perform ('FULL', 'BASIC', or 'NORMAL').
-     * @param {string} LicenseKey - Your license key to use the service. 
+     * @param {string} phoneNumber - The 10 digit phone number.
+     * @param {string} testType - The type of validation to perform ('FULL', 'BASIC', or 'NORMAL').
+     * @param {string} licenseKey - Your license key to use the service. 
      * @param {boolean} isLive - Value to determine whether to use the live or trial servers.
      * @param {number} timeoutSeconds - Timeout, in seconds, for the call to the service.
      * @throws {Error} Thrown if LicenseKey is empty or null.
@@ -31,12 +30,12 @@ class GetPhoneInfoSoap {
         this.isLive = isLive;
         this.timeoutSeconds = timeoutSeconds;
 
-        this.LiveBaseUrl = "https://sws.serviceobjects.com/GPPL2/api.svc?wsdl";
-        this.BackupBaseUrl = "https://swsbackup.serviceobjects.com/GPPL2/api.svc?wsdl";
-        this.TrialBaseUrl = "https://trial.serviceobjects.com/GPPL2/api.svc?wsdl";
+        this.liveBaseUrl = "https://sws.serviceobjects.com/GPPL2/api.svc?singlewsdl";
+        this.backupBaseUrl = "https://swsbackup.serviceobjects.com/GPPL2/api.svc?singlewsdl";
+        this.trialBaseUrl = "https://trial.serviceobjects.com/GPPL2/api.svc?singlewsdl";
 
-        this._primaryWsdl = this.isLive ? this.LiveBaseUrl : this.TrialBaseUrl;
-        this._backupWsdl = this.isLive ? this.BackupBaseUrl : this.TrialBaseUrl;
+        this._primaryWsdl = this.isLive ? this.liveBaseUrl : this.trialBaseUrl;
+        this._backupWsdl = this.isLive ? this.backupBaseUrl : this.trialBaseUrl;
     }
 
     /**
@@ -91,8 +90,7 @@ class GetPhoneInfoSoap {
                         if (!rawData) {
                             return reject(new Error("SOAP response is empty or undefined."));
                         }
-                        const parsed = new GPPL2Response(rawData);
-                        resolve(parsed);
+                        resolve(rawData);
                     } catch (parseErr) {
                         reject(new Error(`Failed to parse SOAP response: ${parseErr.message}`));
                     }

@@ -1,11 +1,11 @@
 export class Provider {
     constructor(data = {}) {
-        this.Name = data.Name || null;
-        this.City = data.City || null;
-        this.State = data.State || null;
-        this.LineType = data.LineType || null;
-        this.Latitude = data.Latitude || null;
-        this.Longitude = data.Longitude || null;
+        this.Name = data.Name;
+        this.City = data.City;
+        this.State = data.State;
+        this.LineType = data.LineType;
+        this.Latitude = data.Latitude;
+        this.Longitude = data.Longitude;
     }
 
     toString() {
@@ -15,17 +15,17 @@ export class Provider {
 
 export class Contacts {
     constructor(data = {}) {
-        this.Name = data.Name || null;
-        this.Address = data.Address || null;
-        this.City = data.City || null;
-        this.State = data.State || null;
-        this.PostalCode = data.PostalCode || null;
-        this.PhoneType = data.PhoneType || null;
-        this.Latitude = data.Latitude || null;
-        this.Longitude = data.Longitude || null;
-        this.SICCode = data.SICCode || null;
-        this.SICDesc = data.SICDesc || null;
-        this.QualityScore = data.QualityScore || null;
+        this.Name = data.Name;
+        this.Address = data.Address;
+        this.City = data.City;
+        this.State = data.State;
+        this.PostalCode = data.PostalCode;
+        this.PhoneType = data.PhoneType;
+        this.Latitude = data.Latitude;
+        this.Longitude = data.Longitude;
+        this.SICCode = data.SICCode;
+        this.SICDesc = data.SICDesc;
+        this.QualityScore = data.QualityScore;
     }
 
     toString() {
@@ -37,13 +37,13 @@ export class PhoneInfo {
     constructor(data = {}) {
         this.Provider = data.Provider ? new Provider(data.Provider) : null;
         this.Contacts = (data.Contacts || []).map(contact => new Contacts(contact));
-        this.SMSAddress = data.SMSAddress || null;
-        this.MMSAddress = data.MMSAddress || null;
-        this.DateFirstSeen = data.DateFirstSeen || null;
-        this.DateOfPorting = data.DateOfPorting || null;
-        this.NoteCodes = data.NoteCodes || null;
-        this.NoteDescriptions = data.NoteDescriptions || null;
-        this.TokensUsed = data.TokensUsed || null;
+        this.SMSAddress = data.SMSAddress;
+        this.MMSAddress = data.MMSAddress;
+        this.DateFirstSeen = data.DateFirstSeen;
+        this.DateOfPorting = data.DateOfPorting;
+        this.NoteCodes = data.NoteCodes;
+        this.NoteDescriptions = data.NoteDescriptions;
+        this.TokensUsed = data.TokensUsed;
     }
 
     toString() {
@@ -56,10 +56,10 @@ export class PhoneInfo {
 
 export class Error {
     constructor(data = {}) {
-        this.Type = data.Type || null;
-        this.TypeCode = data.TypeCode || null;
-        this.Desc = data.Desc || null;
-        this.DescCode = data.DescCode || null;
+        this.Type = data.Type;
+        this.TypeCode = data.TypeCode;
+        this.Desc = data.Desc;
+        this.DescCode = data.DescCode;
     }
 
     toString() {
@@ -69,9 +69,9 @@ export class Error {
 
 export class GPPL2Response {
     constructor(data = {}) {
-        this.PhoneNumber = data.PhoneNumber || null;
-        this.TestType = data.TestType || null;
-        this.LicenseKey = data.LicenseKey || null;
+        this.PhoneNumber = data.PhoneNumber;
+        this.TestType = data.TestType;
+        this.LicenseKey = data.LicenseKey;
         this.PhoneInfo = data.PhoneInfo ? new PhoneInfo(data.PhoneInfo) : null;
         this.Error = data.Error ? new Error(data.Error) : null;
     }
